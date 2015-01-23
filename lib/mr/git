@@ -6,7 +6,7 @@ lib =
     git_clone() {
         check_repo_name
         info "Cloning from $1"
-        git clone ${GIT_RECURSIVE;+--recursive} "$1" "$MR_REPO"
+        git clone ${GIT_RECURSIVE:+--recursive} "$1" "$MR_REPO"
         if test -n "$GIT_TAG"; then
             git_tag_update
         fi

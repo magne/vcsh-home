@@ -31,6 +31,6 @@ include =
     # Then load the vcsh configurations
     include_dir ${XDG_CONFIG_HOME:-$HOME/.config}/mr/config.d
     # Finally load the groups
-    include_dir $XDG_CONFIG_HOME/mr/groups.d
+    include_dir ${XDG_CONFIG_HOME:-$HOME/.config}/mr/groups.d
 
 #vim: syntax=sh
