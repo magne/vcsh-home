@@ -40,16 +40,11 @@ lib =
     vcsh_cfg_post_d () {
         check_vcsh_name
         dir=${HOME}/.cfg-post.d
-        # Run .cfg-post.d/${MR_REPO}.*
-        for f in `find ${dir} -executable -type f -iname ${VCSH_NAME}`; do
+        # Run .cfg-post.d/${MR_REPO}{,.*}
+        for f in `find ${dir} -executable -type f -iregex '.*/${VCSH_NAME}\(\..+\)?'`; do
             echo "Running $f"
             "$f"
         done
-        # Run the vcsh-home cfg-post.d script (for cron, ...)
-        if test -x "${dir}/vcsh-home"; then
-            echo "Running ${dir}/vcsh-home"
-            "${dir}/vcsh-home"
-        fi
     }
 
 checkout = vcsh_git_clone
