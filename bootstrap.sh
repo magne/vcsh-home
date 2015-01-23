@@ -9,6 +9,7 @@
 #   * git
 #   * mr
 #   * vcsh
+#   * zsh
 #
 
 # The most important line in any shell script.
@@ -49,11 +50,12 @@ check_cmd() {
     }
 }
 
-# First, check for the precense of essential tools (get, mr, vcsh)
+# First, check for the precense of essential tools (get, mr, vcsh, zsh)
 log "Checking needed commands:$(tput bold)"
 check_cmd git
 check_cmd mr
 check_cmd vcsh
+check_cmd zsh
 
 # Next, we'll prepare for the initial bootstrap. It is basically :
 XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
@@ -136,8 +138,7 @@ echo "   $name"
 echo "$(tput sgr0)"
 
 for dot in .bashrc .bash_profile .bash_logout .zshrc .zprofile .zshenv .zlogin .zlogout; do
-    echo $dot
-    #test -f $HOME/$dot && mv $HOME/$dot $HOME/$dot.orig
+    test -f $HOME/$dot && mv $HOME/$dot $HOME/$dot.orig
 done
 
 # * Clone the vcsh-home repository
@@ -146,12 +147,12 @@ vcsh clone git@github.com:magne/vcsh-home.git vcsh-home
 
 # * Clone the sh-config repository
 log "Getting sh-config first"
-#vcsh clone git://github.com/magne/sh-config.git sh-config
+vcsh clone git://github.com/magne/sh-config.git sh-config
 
 # Running mr in interactive mode on the most important one
 # Update in a new shell (benefits from the sh-config)
 log "Updating everything in a new shell: $SHELL"
-test -z "$SKIP_MRI" && $SHELL -c "mr -i -d .config u"
+test -z "$SKIP_MRI" && $SHELL -c "mr -i -d ${XDG_CONFIG_HOME} u"
 
 # Explain to the user how to add configuration
-log "That's it, Your home is now configured.\n You can add or remove configuration using vcsh."
+log "That's it, Your home is now configured. You can add or remove configuration using vcsh."
