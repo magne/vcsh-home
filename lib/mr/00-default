@@ -1,0 +1,3 @@
+# Default mr file (should always sourced, and first)
+lib =
+    [ -z "$MR_NAME" ] && MR_NAME=$(basename $MR_REPO)

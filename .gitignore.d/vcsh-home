@@ -10,5 +10,7 @@
 !lib/mr/*
 !lib/vcsh/
 !lib/vcsh/*
+!.cfg-post.d/
+!.cfg-post.d/vcsh-home*
 !.gitignore.d/
 !.gitignore.d/vcsh-home
