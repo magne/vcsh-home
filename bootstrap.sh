@@ -142,7 +142,7 @@ done
 
 # * Clone the vcsh-home repository
 log "Cloning vcsh-home"
-vcsh clone git://github.com/magne/vcsh-home.git vcsh-home
+vcsh clone git@github.com:magne/vcsh-home.git vcsh-home
 
 # * Clone the sh-config repository
 log "Getting sh-config first"
