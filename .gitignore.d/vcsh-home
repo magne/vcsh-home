@@ -1,0 +1,14 @@
+*
+!.config/
+!.config/mr/
+!.config/mr/*
+!.config/mr/available.d/vcsh-home.vcsh
+!.config/mr/config.d/vcsh-home.vcsh
+!.mrconfig
+!lib/
+!lib/mr/
+!lib/mr/*
+!lib/vcsh/
+!lib/vcsh/*
+!.gitignore.d/
+!.gitignore.d/vcsh-home
