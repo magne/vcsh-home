@@ -25,7 +25,7 @@ log() {
         ECHO_ARGS='-n'
         shift
     }
-    echo $ECHO_ARGS "$(tput sgr0)$(tput setaf 2)>$(tput bold)<$(tput sgr0) $*"
+    echo -e $ECHO_ARGS "$(tput sgr0)$(tput setaf 2)>$(tput bold)<$(tput sgr0) $*"
 }
 
 # *warn*: a wrapper of echo to print stuff in a more colorful way, warning
@@ -35,7 +35,7 @@ warn() {
         ECHO_ARGS='-n'
         shift
     }
-    echo $ECHO_ARGS "$(tput sgr0)$(tput setaf 3)>$(tput bold)<$(tput sgr0) $*"
+    echo -e $ECHO_ARGS "$(tput sgr0)$(tput setaf 3)>$(tput bold)<$(tput sgr0) $*"
 }
 
 # *check_cmd*: check for a command and fail if not present
@@ -147,12 +147,12 @@ vcsh clone git@github.com:magne/vcsh-home.git vcsh-home
 
 # * Clone the sh-config repository
 log "Getting sh-config first"
-vcsh clone git://github.com/magne/sh-config.git sh-config
+vcsh clone git@github.com:magne/sh-config.git sh-config
 
 # Running mr in interactive mode on the most important one
 # Update in a new shell (benefits from the sh-config)
 log "Updating everything in a new shell: $SHELL"
-test -z "$SKIP_MRI" && $SHELL -c "mr -i -d ${XDG_CONFIG_HOME} u"
+test -z "$SKIP_MRI" && $SHELL -c "mr -i -d $HOME update"
 
 # Explain to the user how to add configuration
 log "That's it, Your home is now configured. You can add or remove configuration using vcsh."
