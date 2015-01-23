@@ -92,9 +92,9 @@ echo "   $name"
 name="pre-upgrade.01-defaultSparseCheckout"
 cat > $HOOK_A/$name << HOOK
 #!/bin/sh
-if ! test $(grep $name \$GIT_DIR/info/sparse-checkout); then
+if ! test \$(grep $name \$GIT_DIR/info/sparse-checkout); then
     cat >> \$GIT_DIR/info/sparse-checkout << EOF
-#/ from $name
+# from $name
 *
 EOF
 fi
@@ -107,9 +107,9 @@ echo "   $name"
 name="pre-upgrade.02-READMEsparseCheckout"
 cat > $HOOK_A/$name << HOOK
 #!/bin/sh
-if ! test $(grep $name \$GIT_DIR/info/sparse-checkout); then
+if ! test \$(grep $name \$GIT_DIR/info/sparse-checkout); then
     cat >> \$GIT_DIR/info/sparse-checkout << EOF
-#/ from $name
+# from $name
 !README
 !README.md
 EOF
@@ -123,9 +123,9 @@ echo "   $name"
 name="pre-upgrade.02-.gitignoreSparseCheckout"
 cat > $HOOK_A/$name << HOOK
 #!/bin/sh
-if ! test $(grep $name \$GIT_DIR/info/sparse-checkout); then
+if ! test \$(grep $name \$GIT_DIR/info/sparse-checkout); then
     cat >> \$GIT_DIR/info/sparse-checkout << EOF
-#/ from $name
+# from $name
 !.gitignore
 EOF
 fi
