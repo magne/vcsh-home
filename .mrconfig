@@ -1,0 +1,36 @@
+[DEFAULT]
+jobs = 5
+git_gc = git gc "$@"
+
+include =
+    # Helper method to include files
+    include_files() {
+        for f in "$@"; do
+            case "$f" in
+                *.orig|*~) continue ;;
+            esac
+            echo "# INCLUDED FROM : $f"
+            cat "$f"
+            echo # Needed in case file isn't terminated with a newline
+        done
+    }
+    # Helper method to include directory
+    include_dir() {
+        if test -d "$1"; then
+            if stat -t "$1"/* > /dev/null 2>&1; then
+                include_files "$1"/*
+            else
+                echo "$1 empty" >&2
+            fi
+        else
+            echo "$1 missing" >&2
+        fi
+    }
+    #First load the libs
+    include_dir $HOME/lib/mr
+    # Then load the vcsh configurations
+    include_dir ${XDG_CONFIG_HOME:-$HOME/.config}/mr/config.d
+    # Finally load the groups
+    include_dir $XDG_CONFIG_HOME/mr/groups.d
+
+#vim: syntax=sh
