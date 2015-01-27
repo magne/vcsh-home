@@ -3,7 +3,11 @@
 !.config/mr/
 !.config/mr/*
 !.config/mr/available.d/vcsh-home.vcsh
+!.config/mr/available.d/sh-config.vcsh
+!.config/mr/available.d/vim-config.vcsh
 !.config/mr/config.d/vcsh-home.vcsh
+!.config/mr/config.d/sh-config.vcsh
+!.config/mr/config.d/vim-config.vcsh
 !.mrconfig
 !lib/
 !lib/mr/
