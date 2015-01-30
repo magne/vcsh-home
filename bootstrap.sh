@@ -94,7 +94,7 @@ echo "   $name"
 name="pre-upgrade.01-defaultSparseCheckout"
 cat > $HOOK_A/$name << HOOK
 #!/bin/sh
-if ! test \$(grep $name \$GIT_DIR/info/sparse-checkout); then
+if ! test \$(grep $name \$GIT_DIR/info/sparse-checkout >/dev/null 2>&1); then
     cat >> \$GIT_DIR/info/sparse-checkout << EOF
 # from $name
 *
@@ -109,7 +109,7 @@ echo "   $name"
 name="pre-upgrade.02-READMEsparseCheckout"
 cat > $HOOK_A/$name << HOOK
 #!/bin/sh
-if ! test \$(grep $name \$GIT_DIR/info/sparse-checkout); then
+if ! test \$(grep $name \$GIT_DIR/info/sparse-checkout >/dev/null 2>&1); then
     cat >> \$GIT_DIR/info/sparse-checkout << EOF
 # from $name
 !README
@@ -125,7 +125,7 @@ echo "   $name"
 name="pre-upgrade.02-.gitignoreSparseCheckout"
 cat > $HOOK_A/$name << HOOK
 #!/bin/sh
-if ! test \$(grep $name \$GIT_DIR/info/sparse-checkout); then
+if ! test \$(grep $name \$GIT_DIR/info/sparse-checkout >/dev/null 2>&1); then
     cat >> \$GIT_DIR/info/sparse-checkout << EOF
 # from $name
 !.gitignore
@@ -137,7 +137,7 @@ ln -sfn $HOOK_A/$name $HOOK_D/$name
 echo "   $name"
 echo "$(tput sgr0)"
 
-for dot in .bashrc .bash_profile .bash_logout .zshrc .zprofile .zshenv .zlogin .zlogout; do
+for dot in .bashrc .bash_profile .bash_logout .zshrc .zprofile .zshenv .zlogin .zlogout .vim .vimrc; do
     test -f $HOME/$dot && mv $HOME/$dot $HOME/$dot.orig
 done
 
