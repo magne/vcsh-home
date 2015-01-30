@@ -1,0 +1,11 @@
+[$HOME/.zprezto]
+lib =
+    GIT_RECURSIVE=true
+    GITHUB_NAME=prezto
+    init_zprezto() {
+        for rcfile in $(find "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/ -type f -not -name 'README.md*'); do
+            ln -s "$rcfile" "${ZDOTDIR:-$HOME}"/.$(basename $rcfile)
+        done
+    }
+checkout = github_clone
+post_checkout = init_zprezto
