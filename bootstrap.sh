@@ -138,7 +138,7 @@ echo "   $name"
 echo "$(tput sgr0)"
 
 for dot in .bashrc .bash_profile .bash_logout .zshrc .zprofile .zshenv .zlogin .zlogout .vim .vimrc; do
-    test -f $HOME/$dot && mv $HOME/$dot $HOME/$dot.orig
+    test -e $HOME/$dot && ! test -e $HOME/$dot.orig && mv $HOME/$dot $HOME/$dot.orig
 done
 
 # * Clone the vcsh-home repository
