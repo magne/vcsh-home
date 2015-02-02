@@ -135,6 +135,44 @@ HOOK
 chmod +x $HOOK_A/$name
 ln -sfn $HOOK_A/$name $HOOK_D/$name
 echo "   $name"
+
+# vcsh hook for moving existing files out of the way temporarily (unclobber).
+name="pre-merge-unclobber"
+cat > $HOOK_A/$name << "HOOK"
+#!/bin/bash
+
+# This code does amost exactly what the native vcsh sanity checking code
+# does except that on finding a potential merge conflict, it moves existing
+# files out of the way temporarily. Merging (part of `vcsh clone`) happens
+# cleanly, and a post-merge hook can be used to figure out what to do with
+# the now-renamed files.
+
+for object in $(git ls-tree -r origin/master | awk '{print $4}'); do
+    [ -e "$object" ] && mv "$object" "$object.vcsh-unclobber" 
+done
+HOOK
+chmod +x $HOOK_A/$name
+ln -sfn $HOOK_A/$name $HOOK_D/$name
+echo "   $name"
+
+# vcsh hook for moving existing files back (unclobber).
+name="post-merge-unclobber"
+cat > $HOOK_A/$name << "HOOK"
+#!/bin/sh
+
+# This finds objects that the pre-merge script moved out of the way to
+# avoid conflicts when running `vcsh clone` and moves them back to their
+# original places. The result is that the Git repository gets checked out
+# without error and the pre-existing files end up back in the working
+# directory. Git and thus vcsh now see these as un-staged changes to the
+# working branch and you can deal with them as usual.
+
+find . -name '*.vcsh-unclobber' -execdir rename .vcsh-unclobber '' {} \;
+HOOK
+chmod +x $HOOK_A/$name
+ln -sfn $HOOK_A/$name $HOOK_D/$name
+echo "   $name"
+
 echo "$(tput sgr0)"
 
 for dot in .bashrc .bash_profile .bash_logout .zshrc .zprofile .zshenv .zlogin .zlogout .vim .vimrc; do
