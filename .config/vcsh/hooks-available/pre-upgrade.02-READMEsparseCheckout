@@ -1,8 +1,0 @@
-#!/bin/sh
-if ! test $(grep pre-upgrade.02-READMEsparseCheckout $GIT_DIR/info/sparse-checkout); then
-    cat >> $GIT_DIR/info/sparse-checkout << EOF
-# from pre-upgrade.02-READMEsparseCheckout
-!README
-!README.md
-EOF
-fi
