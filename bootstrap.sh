@@ -25,7 +25,7 @@ log() {
         ECHO_ARGS='-n'
         shift
     }
-    echo -e $ECHO_ARGS "$(tput sgr0)$(tput setaf 2)>$(tput bold)<$(tput sgr0) $*"
+    echo $ECHO_ARGS "$(tput sgr0)$(tput setaf 2)>$(tput bold)<$(tput sgr0) $*"
 }
 
 # *warn*: a wrapper of echo to print stuff in a more colorful way, warning
@@ -35,7 +35,7 @@ warn() {
         ECHO_ARGS='-n'
         shift
     }
-    echo -e $ECHO_ARGS "$(tput sgr0)$(tput setaf 3)>$(tput bold)<$(tput sgr0) $*"
+    echo $ECHO_ARGS "$(tput sgr0)$(tput setaf 3)>$(tput bold)<$(tput sgr0) $*"
 }
 
 # *check_cmd*: check for a command and fail if not present
@@ -148,7 +148,7 @@ cat > $HOOK_A/$name << "HOOK"
 # the now-renamed files.
 
 for object in $(git ls-tree -r origin/master | awk '{print $4}'); do
-    [ -e "$object" ] && mv "$object" "$object.vcsh-unclobber" 
+    [ -e "$object" ] && mv -f "$object" "$object.vcsh-unclobber" 
 done
 HOOK
 chmod +x $HOOK_A/$name
@@ -167,7 +167,7 @@ cat > $HOOK_A/$name << "HOOK"
 # directory. Git and thus vcsh now see these as un-staged changes to the
 # working branch and you can deal with them as usual.
 
-find . -name '*.vcsh-unclobber' -execdir mv {} $(basename {} .vcsh-unclobber) \;
+find . -name '*.vcsh-unclobber' -execdir rename -f 's/\.vcsh-unclobber//' {} \;
 HOOK
 chmod +x $HOOK_A/$name
 ln -sfn $HOOK_A/$name $HOOK_D/$name
@@ -183,14 +183,10 @@ done
 log "Cloning vcsh-home"
 vcsh clone git@github.com:magne/vcsh-home.git vcsh-home
 
-# * Clone the sh-config repository
-log "Getting sh-config first"
-vcsh clone git@github.com:magne/sh-config.git sh-config
-
 # Running mr in interactive mode on the most important one
 # Update in a new shell (benefits from the sh-config)
 log "Updating everything in a new shell: $SHELL"
-test -z "$SKIP_MRI" && $SHELL -c "mr -i -d $HOME update"
+test -z "$SKIP_MRI" && mr -i -d $HOME update
 
 # Explain to the user how to add configuration
 log "That's it, Your home is now configured. You can add or remove configuration using vcsh."
