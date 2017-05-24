@@ -175,7 +175,7 @@ echo "   $name"
 
 echo "$(tput sgr0)"
 
-for dot in .bashrc .bash_profile .bash_logout .zshrc .zprofile .zshenv .zlogin .zlogout .vim .vimrc; do
+for dot in .bashrc .bash_profile .bash_logout .profile .zshrc .zprofile .zshenv .zlogin .zlogout .vim .vimrc; do
     test -e $HOME/$dot && ! test -e $HOME/$dot.orig && mv $HOME/$dot $HOME/$dot.orig
 done
 
