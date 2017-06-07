@@ -167,7 +167,7 @@ cat > $HOOK_A/$name << "HOOK"
 # directory. Git and thus vcsh now see these as un-staged changes to the
 # working branch and you can deal with them as usual.
 
-find . -name '*.vcsh-unclobber' -execdir rename -f 's/\.vcsh-unclobber//' {} \;
+find . -name '*.vcsh-unclobber' -execdir mv -f 's/\.vcsh-unclobber//' {} \;
 HOOK
 chmod +x $HOOK_A/$name
 ln -sfn $HOOK_A/$name $HOOK_D/$name
