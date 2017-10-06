@@ -29,7 +29,7 @@ download() {
             PATH="$HOME/bin:$PATH"
         fi
         curl -s -L -o "$HOME/bin/$1" "$2" && {
-            chmod +x "$HOME/bin/$1"
+            chmod 0755 "$HOME/bin/$1"
             write "$(tput cr)\e[K   $(tput setaf 2)$1\n"
         } || {
             write "$(tput cr)\e[K   $(tput setaf 3)Failed to download $1 from $2\n"
@@ -44,7 +44,7 @@ check_cmd git
 check_cmd ssh
 check_cmd curl
 
-[ $cmd_err == 0 ] || {
+[ $cmd_err -eq 0 ] || {
     write "$(tput setaf 1)Missing commands\n"
     exit 1
 }
@@ -57,11 +57,11 @@ download vcsh 'https://raw.githubusercontent.com/RichiH/vcsh/master/vcsh'
 # Check for github access
 log "Checking valid passwordless ssh authentication against github"
 write "   $(tput setaf 7)Checking ..."
-ssh_out="$(ssh -T -o BatchMode=yes -o StrictHostKeyChecking=no git@github.com 2>&1)"
+ssh_out="$(ssh -T -n -o BatchMode=yes -o StrictHostKeyChecking=no git@github.com 2>&1)"
 case $? in
-    1)   write "$(tput cr)\e[K   $(tput setaf 2)Authentication OK\n" ;;
+    1) write "$(tput cr)\e[K   $(tput setaf 2)Authentication OK\n" ;;
     255) write "$(tput cr)\e[K   $(tput setaf 3)Public key authentication failed - $ssh_out\n"; exit 1 ;;
-    *)   write "$(tput cr)\e[K   $(tput setaf 1)Unknown error - $ssh_out\n"; exit 1 ;;
+    *) write "$(tput cr)\e[K   $(tput setaf 1)Unknown error - $ssh_out\n"; exit 1 ;;
 esac
 
 # Next, we'll prepare for the initial bootstrap. It is basically:
@@ -69,7 +69,7 @@ XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 
 # Clone the vcsh-home repository
 log "Cloning the vcsh-home repository"
-vcsh clone git@github.com:magne/vcsh-home.git vcsh-home || exit 1
+vcsh clone git@github.com:magne/vcsh-home.git mr || exit 1
 
 # Running mr in interactive mode on the most important one
 # Update in a new shell (benefits from the sh-config)
