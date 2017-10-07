@@ -1,4 +1,11 @@
 *
-!/.config/mr
+!/.config/mr/available.d/vcsh-home.vcsh
+!/.config/mr/config.d/vcsh-home.vcsh
+!/.config/vcsh/hooks-available/post-init-setup-mr
+!/.config/vcsh/hooks-available/post-merge-unclobber
+!/.config/vcsh/hooks-available/pre-merge-unclobber
+!/.config/vcsh/hooks-enabled/post-init-setup-mr
+!/.config/vcsh/hooks-enabled/post-merge-unclobber
+!/.config/vcsh/hooks-enabled/pre-merge-unclobber
 !/.gitignore.d/mr
 !/.mrconfig
