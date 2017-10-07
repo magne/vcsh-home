@@ -1,0 +1,2 @@
+[${XDG_CONFIG_HOME:-$HOME/.config}/vcsh/repo.d/vim-config.git]
+checkout = vcsh clone git@github.com:magne/vim-config.git

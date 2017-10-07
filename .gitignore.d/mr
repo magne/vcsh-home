@@ -1,6 +1,8 @@
 *
 !/.config/mr/available.d/vcsh-home.vcsh
+!/.config/mr/available.d/vim-config.vcsh
 !/.config/mr/config.d/vcsh-home.vcsh
+!/.config/mr/config.d/vim-config.vcsh
 !/.config/vcsh/hooks-available/post-init-setup-mr
 !/.config/vcsh/hooks-available/post-merge-unclobber
 !/.config/vcsh/hooks-available/pre-merge-unclobber
