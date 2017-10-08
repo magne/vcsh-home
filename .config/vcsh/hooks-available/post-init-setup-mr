@@ -2,9 +2,11 @@
 
 # This sets up your new repos with mr.
 
-cat > ${XDG_CONFIG_HOME:-$HOME/.config}/mr/available.d/$VCSH_DIRECTORY.vcsh << EOF
+if [ ! -e ${XDG_CONFIG_HOME:-$HOME/.config}/mr/available.d/$VCSH_DIRECTORY.vcsh ]; then
+    cat > ${XDG_CONFIG_HOME:-$HOME/.config}/mr/available.d/$VCSH_DIRECTORY.vcsh << EOF
 [\${XDG_CONFIG_HOME:-\$HOME/.config}/vcsh/repo.d/$VCSH_DIRECTORY.git]
 checkout = vcsh clone $GITURL/dotfiles/$VCSH_DIRECTORY.git
 EOF
 
-ln -s ${XDG_CONFIG_HOME:-$HOME/.config}/mr/available.d/$VCSH_DIRECTORY.vcsh ${XDG_CONFIG_HOME:-$HOME/.config}/mr/config.d/
+    ln -s ${XDG_CONFIG_HOME:-$HOME/.config}/mr/available.d/$VCSH_DIRECTORY.vcsh ${XDG_CONFIG_HOME:-$HOME/.config}/mr/config.d/
+fi
