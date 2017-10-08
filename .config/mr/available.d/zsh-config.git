@@ -1,0 +1,17 @@
+[${ZDOTDIR:-$HOME}/.zprezto]
+lib =
+    init_prezto() {
+        for rcfile in $(find "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/ -type f -not -name 'README.md*'); do
+            local dest="${ZDOTDIR:-$HOME}"/.$(basename $rcfile)
+            if [ -f "$dest" ]; then
+                mv "$dest" "$dest.orig"
+            fi
+            if [ -e "$dest" ]; then
+                echo "Could not link $dest to $rcfile"
+            else
+                ln -sfn "$rcfile" "${ZDOTDIR:-$HOME}"/.$(basename $rcfile)
+            fi
+        done
+    }
+checkout = git clone --recursive git@github.com:magne/prezto.git "${ZDOTDIR:-$HOME}"/.zprezto
+post_checkout = init_prezto
