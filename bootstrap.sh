@@ -42,6 +42,8 @@ download() {
 log "Checking needed commands:"
 check_cmd git
 check_cmd ssh
+check_cmd awk
+check_cmd sed
 check_cmd curl
 
 [ $cmd_err -eq 0 ] || {
