@@ -1,2 +1,3 @@
 [${XDG_CONFIG_HOME:-$HOME/.config}/vcsh/repo.d/mr.git]
+order = 1
 checkout = vcsh clone git@github.com:magne/vcsh-home.git mr
