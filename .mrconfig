@@ -1,7 +1,7 @@
 [DEFAULT]
 git_gc = git gc "$@"
-jobs = 5
+#jobs = 5
 
-include = cat ${XDG_CONFIG_HOME:-$HOME/.config}/mr/config.d/*
+include = awk '{print $0}' ${XDG_CONFIG_HOME:-$HOME/.config}/mr/config.d/*
 
 #vim: syntax=sh
