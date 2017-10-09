@@ -7,11 +7,13 @@
 !/.config/mr/config.d/vcsh-home.vcsh
 !/.config/mr/config.d/vim-config.vcsh
 !/.config/mr/config.d/zsh-config.git
+!/.config/vcsh/config
 !/.config/vcsh/hooks-available/post-init-setup-mr
 !/.config/vcsh/hooks-available/post-merge-unclobber
 !/.config/vcsh/hooks-available/pre-merge-unclobber
 !/.config/vcsh/hooks-enabled/post-init-setup-mr
 !/.config/vcsh/hooks-enabled/post-merge-unclobber
 !/.config/vcsh/hooks-enabled/pre-merge-unclobber
+!/.gitattributes.d/mr
 !/.gitignore.d/mr
 !/.mrconfig
