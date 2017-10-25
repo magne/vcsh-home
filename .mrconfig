@@ -1,6 +1,7 @@
 [DEFAULT]
 git_gc = git gc "$@"
 #jobs = 5
+configuser = git config --global user.name 'Magne Rasmussen' && git config --global user.email 'magne.rasmussen@gmail.com'
 
 include = awk '{print $0}' ${XDG_CONFIG_HOME:-$HOME/.config}/mr/config.d/*
 
